@@ -64,17 +64,59 @@ Silence means all 6 tests pass. Leave the other files as they are: `Order.java`,
 
 Read a hint only when the failure message is not enough.
 
-**Task 1.** `find("web", 1002)` returns `null` for an order you just registered, although `equals` is correct. Before a `HashMap` ever calls `equals`, which other method does it call on the key? What does `OrderKey` inherit for that method from `Object`? Add the missing override, built from exactly the fields `equals` compares (`java.util.Objects` has a helper for several fields). A `record` would have generated it for you.
+**Task 1**
 
-**Task 2.** A for-each loop over the map's keys removes entries, and its hidden iterator throws `ConcurrentModificationException`. Remove through the collection itself: `removeIf` on one of the map's views (its values are the orders), or an explicit `Iterator` and its own `remove` method. Keep returning how many orders were removed.
+<details>
+<summary>Hint</summary>
 
-**Task 3.** In `queue`, create a station's `ArrayDeque` only the first time that station appears (`computeIfAbsent` does both), then add the order at the back. In `dispatchNext`, the station may have no queue at all (`null`), or an empty one. Take the oldest order with the `Deque` method that returns `null` instead of throwing, and push a real order onto `dispatched` before you return it.
+`find("web", 1002)` returns `null` for an order you just registered, although `equals` is correct. Before a `HashMap` ever calls `equals`, which other method does it call on the key? What does `OrderKey` inherit for that method from `Object`? Add the missing override, built from exactly the fields `equals` compares (`java.util.Objects` has a helper for several fields). A `record` would have generated it for you.
 
-**Task 4.** `dispatched` is a stack, with the newest dispatch on top. With nothing dispatched, return `null`. Otherwise take the newest order off and put it back at the **head** of its station's queue, the end the queue takes from. On a deque, the stack's adding method works at the head.
+</details>
 
-**Task 5.** The method compares every order with every held sku: about n × m steps. Read the held list once into a `HashSet`, then check each order's sku against the set. Fill in the two Big-O labels in the method comment yourself; the tests do not read them. The test fails if your method reads the list it is given more than once.
+**Task 2**
 
-**Task 6.** The totals are right, but a `HashMap` keeps no order. Switch to the `Map` that keeps its keys sorted, and replace the `getOrDefault`-and-`put` line with one `merge` call. Keys sort as text, so `B12` comes before `B2`.
+<details>
+<summary>Hint</summary>
+
+A for-each loop over the map's keys removes entries, and its hidden iterator throws `ConcurrentModificationException`. Remove through the collection itself: `removeIf` on one of the map's views (its values are the orders), or an explicit `Iterator` and its own `remove` method. Keep returning how many orders were removed.
+
+</details>
+
+**Task 3**
+
+<details>
+<summary>Hint</summary>
+
+In `queue`, create a station's `ArrayDeque` only the first time that station appears (`computeIfAbsent` does both), then add the order at the back. In `dispatchNext`, the station may have no queue at all (`null`), or an empty one. Take the oldest order with the `Deque` method that returns `null` instead of throwing, and push a real order onto `dispatched` before you return it.
+
+</details>
+
+**Task 4**
+
+<details>
+<summary>Hint</summary>
+
+`dispatched` is a stack, with the newest dispatch on top. With nothing dispatched, return `null`. Otherwise take the newest order off and put it back at the **head** of its station's queue, the end the queue takes from. On a deque, the stack's adding method works at the head.
+
+</details>
+
+**Task 5**
+
+<details>
+<summary>Hint</summary>
+
+The method compares every order with every held sku: about n × m steps. Read the held list once into a `HashSet`, then check each order's sku against the set. Fill in the two Big-O labels in the method comment yourself; the tests do not read them. The test fails if your method reads the list it is given more than once.
+
+</details>
+
+**Task 6**
+
+<details>
+<summary>Hint</summary>
+
+The totals are right, but a `HashMap` keeps no order. Switch to the `Map` that keeps its keys sorted, and replace the `getOrDefault`-and-`put` line with one `merge` call. Keys sort as text, so `B12` comes before `B2`.
+
+</details>
 
 ## Reference
 
