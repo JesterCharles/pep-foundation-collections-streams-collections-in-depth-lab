@@ -8,14 +8,14 @@ You will finish the order registry of a small warehouse. It stores orders by key
 Open project -> Run starter tests -> Edit TODOs (Tasks 1-6) -> Rerun tests -> Read feedback -> Submit when tests pass
 ```
 
-In words: open the project, run the tests once, then for each task edit its `TODO`, rerun the tests and read the feedback. Submit when every test passes.
+In words: open the project, run the tests once, then for each task edit its `TODO`, rerun the tests and read the feedback. Submit when every visible test passes.
 
 ## Quick start
 
 1. **Open the lab project.** The files you edit are in `src/main/java/exercise/`.
 2. **Run the starter tests.** Select **Run Tests**.
 
-   **All 6 tests fail at first. That is expected:** no task's `TODO` is done yet. Each failure message starts with its task number.
+   **All 6 visible tests fail at first. That is expected:** no task's `TODO` is done yet. Each failure message starts with its task number.
 
 ## Your tasks
 
@@ -38,9 +38,9 @@ mvn -q test -Dtest="VisibleTests#task1*"
 
 It prints nothing when that task passes.
 
-**You are done when all 6 tests pass.** Then select **Submit**.
+**You are done when all 6 visible tests pass.** Then select **Submit**. Submitting also runs held-out tests you can't see.
 
-Leave the other files as they are: `Order.java`, `pom.xml` and `expected/`. The tests in `src/test/java/exercise/` are restored to their original state before your work is graded, so changes to them do not count.
+Leave the other files as they are: `Order.java` and `pom.xml`. The tests in `src/test/java/exercise/` are restored to their original state before your work is graded, so changes to them do not count.
 
 ## Hints
 
@@ -109,9 +109,20 @@ mvn -q compile
 java -cp target/classes exercise.RoutingRegistry
 ```
 
-It prints six lines. When all tasks are done they match `expected/test-summary.txt`. On the starter, some lines already look right (Held and Dropped); trust the tests, not the demo.
+It prints six lines. When all tasks are done they are:
 
-**What the tests check.** They run your code with several inputs and edge cases, and check that `heldOrders` reads its input list only once. They do not check your Big-O labels or whether you used `merge`; check those yourself.
+```
+Registered 5 orders; web-1002 is kettle at B2
+Dispatched from B2: web-1001
+Undo: web-1001; B2 next: [web-1001, web-1002]
+Held (mug): [web-1001, web-1003]
+Units by station: {A1=2, B2=3, C3=4}
+Dropped discontinued (rug): 1; 4 orders left
+```
+
+On the starter, some lines already look right (Held and Dropped); trust the tests, not the demo.
+
+**What the tests check.** Run Tests runs the visible tests. Submit also runs held-out tests you can't see: they try more inputs and edge cases, such as a key that was never registered or a station that never had a queue, so make each method correct for every case its comment describes. The tests also check that `heldOrders` reads its input list only once. They do not check your Big-O labels or whether you used `merge`; check those yourself.
 
 **Start over.** Undo your edits in `OrderKey.java` and `RoutingRegistry.java`. Compiled files go to `target`, which you can delete at any time.
 
