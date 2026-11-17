@@ -1,8 +1,26 @@
-# Maven build output
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+reports/
+
+# Node
+node_modules/
+
+# Java
 target/
+build/
+.gradle/
+*.class
+
 # Editor and OS files
 .idea/
 *.iml
-.vscode/
+.classpath
+.project
+.settings/
+.factorypath
 .DS_Store
 Thumbs.db
