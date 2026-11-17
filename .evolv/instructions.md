@@ -12,14 +12,14 @@ In words: open the project, run the tests once, then for each task edit its `TOD
 
 ## Quick start
 
-1. **Open the lab project.** The files you edit are in `src/main/java/routing/`.
+1. **Open the lab project.** The files you edit are in `src/main/java/exercise/`.
 2. **Run the starter tests.** Select **Run Tests**.
 
    **All 6 tests fail at first. That is expected:** no task's `TODO` is done yet. Each failure message starts with its task number.
 
 ## Your tasks
 
-Edit only these two files in `src/main/java/routing/`. Each task has a `TODO Task N` comment there.
+Edit only these two files in `src/main/java/exercise/`. Each task has a `TODO Task N` comment there.
 
 - [ ] **Task 1** `OrderKey.java`: equal keys do not find the same order. Find out why and fix the class.
 - [ ] **Task 2** `RoutingRegistry.java`, `dropDiscontinued`: removing orders while looping crashes. Remove them safely.
@@ -33,14 +33,14 @@ Edit only these two files in `src/main/java/routing/`. Each task has a `TODO Tas
 To run only one task's test from a terminal instead, replace `1` with the task number:
 
 ```
-mvn -q test -Dtest="RoutingRegistryTest#task1*"
+mvn -q test -Dtest="VisibleTests#task1*"
 ```
 
 It prints nothing when that task passes.
 
 **You are done when all 6 tests pass.** Then select **Submit**.
 
-Leave the other files as they are: `Order.java`, `pom.xml` and `expected/`. The tests in `src/test/java/routing/` are restored to their original state before your work is graded, so changes to them do not count.
+Leave the other files as they are: `Order.java`, `pom.xml` and `expected/`. The tests in `src/test/java/exercise/` are restored to their original state before your work is graded, so changes to them do not count.
 
 ## Hints
 
@@ -106,7 +106,7 @@ The totals are right, but a `HashMap` keeps no order. Switch to the `Map` that k
 
 ```
 mvn -q compile
-java -cp target/classes routing.RoutingRegistry
+java -cp target/classes exercise.RoutingRegistry
 ```
 
 It prints six lines. When all tasks are done they match `expected/test-summary.txt`. On the starter, some lines already look right (Held and Dropped); trust the tests, not the demo.

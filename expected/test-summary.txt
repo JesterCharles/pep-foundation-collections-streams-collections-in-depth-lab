@@ -7,10 +7,10 @@ From a terminal, the same check is:
 Result: all 6 tests pass.
 In a terminal, quiet mode (-q) prints only problems, so no output means every test passed.
 
-Test report, target/surefire-reports/routing.RoutingRegistryTest.txt, contains a line that starts with (a run time follows it):
+Test report, target/surefire-reports/exercise.VisibleTests.txt, contains a line that starts with (a run time follows it):
   Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 
-Program output, from java -cp target/classes routing.RoutingRegistry run in the project folder after the tests:
+Program output, from java -cp target/classes exercise.RoutingRegistry run in the project folder after the tests:
   Registered 5 orders; web-1002 is kettle at B2
   Dispatched from B2: web-1001
   Undo: web-1001; B2 next: [web-1001, web-1002]

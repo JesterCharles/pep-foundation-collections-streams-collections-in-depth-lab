@@ -1,4 +1,4 @@
-package routing;
+package exercise;
 
 import java.util.Objects;
 

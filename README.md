@@ -10,13 +10,13 @@ This repository follows the Exa coding-lab scaffold for Java.
 
 | Path | What it is |
 |---|---|
-| `src/main/java/routing/Order.java` | Lab source |
-| `src/main/java/routing/OrderKey.java` | Lab source |
-| `src/main/java/routing/RoutingRegistry.java` | Lab source |
-| `src/test/java/routing/RoutingRegistryTest.java` | Visible tests |
+| `src/main/java/exercise/Order.java` | Lab source |
+| `src/main/java/exercise/OrderKey.java` | Lab source |
+| `src/main/java/exercise/RoutingRegistry.java` | Lab source |
+| `src/test/java/exercise/VisibleTests.java` | Visible tests |
 | `.evolv/instructions.md` | Learner instructions |
 | `.evolv/grade.yml` | Grading manifest, used by Run Tests and by the grader |
-| `pom.xml` | Maven build: Java 17 and JUnit 5.11.3, matching the scaffold |
+| `pom.xml` | Maven build, identical to the scaffold's: Java 17 and JUnit 5.11.3 |
 | `Dockerfile` | Image for local Run Tests; warms the Maven cache |
 | `expected/test-summary.txt` | The result of a finished lab |
 
