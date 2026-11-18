@@ -5,37 +5,21 @@ You will finish the order registry of a small warehouse. It stores orders by key
 **Time:** about 30 minutes, in two sessions: Tasks 1-4 first, then Tasks 5-6. If you pass 30 minutes, stop and finish later; your edits stay in the files.
 
 ```
-Open project -> Run starter tests -> Edit TODOs (Tasks 1-6) -> Rerun tests -> Read feedback -> Stop when tests pass
+Open project -> Run starter tests -> Edit TODOs (Tasks 1-6) -> Rerun tests -> Read feedback -> Submit when tests pass
 ```
 
-In words: open the project, run the tests once, then for each task edit its `TODO`, rerun the tests and read the feedback. Stop when every test passes.
+In words: open the project, run the tests once, then for each task edit its `TODO`, rerun the tests and read the feedback. Submit when every visible test passes.
 
 ## Quick start
 
-1. **Open the terminal.** In the provided VS Code project, choose **Terminal > New Terminal**.
-2. **Go to the `starter` folder.** Every command in this lab runs there. (If the terminal prompt already ends in `starter`, skip this step.)
+1. **Open the lab project.** The files you edit are in `src/main/java/exercise/`.
+2. **Run the starter tests.** Select **Run Tests**.
 
-   ```
-   cd starter
-   ```
-
-3. **Download the build's dependencies (once).** It prints nothing when it works:
-
-   ```
-   mvn -q dependency:go-offline
-   ```
-
-4. **Run the starter tests:**
-
-   ```
-   mvn -q -o test
-   ```
-
-   **All 6 tests fail at first. That is expected:** no task's `TODO` is done yet. Maven reports `Tests run: 6, Failures: 6`, and each failure line starts with its task number.
+   **All 6 visible tests fail at first. That is expected:** no task's `TODO` is done yet. Each failure message starts with its task number.
 
 ## Your tasks
 
-Edit only these two files in `starter/src/main/java/routing/`. Each task has a `TODO Task N` comment there.
+Edit only these two files in `src/main/java/exercise/`. Each task has a `TODO Task N` comment there.
 
 - [ ] **Task 1** `OrderKey.java`: equal keys do not find the same order. Find out why and fix the class.
 - [ ] **Task 2** `RoutingRegistry.java`, `dropDiscontinued`: removing orders while looping crashes. Remove them safely.
@@ -44,21 +28,19 @@ Edit only these two files in `starter/src/main/java/routing/`. Each task has a `
 - [ ] **Task 5** `RoutingRegistry.java`, `heldOrders`: replace the slow nested loop with a hash lookup.
 - [ ] **Task 6** `RoutingRegistry.java`, `unitsByStation`: list the stations in sorted order.
 
-**After each task**, run only that task's test. Replace `1` with the task number:
+**After each task**, select **Run Tests** and read the result for that task. A failure message names the task and what is still wrong.
+
+To run only one task's test from a terminal instead, replace `1` with the task number:
 
 ```
-mvn -q -o test -Dtest="RoutingRegistryTest#task1*"
+mvn -q test -Dtest="VisibleTests#task1*"
 ```
 
-It prints nothing when that task passes. If it fails, read the failure line: it names the task and what is still wrong.
+It prints nothing when that task passes.
 
-**You are done when the full test command prints nothing:**
+**You are done when all 6 visible tests pass.** Then select **Submit**. Submitting also runs held-out tests you can't see.
 
-```
-mvn -q -o test
-```
-
-Silence means all 6 tests pass. Leave the other files as they are: `Order.java`, `tests/`, `starter/pom.xml` and `expected/`.
+Leave the other files as they are: `Order.java` and `pom.xml`. The tests in `src/test/java/exercise/` are restored to their original state before your work is graded, so changes to them do not count.
 
 ## Hints
 
@@ -120,28 +102,32 @@ The totals are right, but a `HashMap` keeps no order. Switch to the `Map` that k
 
 ## Reference
 
-**Requirements.** JDK 25 and Apache Maven 3.9 or later. To check, run `java -version` (must say 25) and `mvn -v` (Maven 3.9 or later, and its `Java version:` line must say 25). No database, container or cloud service is needed.
-
-**Why `-o`?** The dependency step downloads the build's plugins and JUnit into your local Maven repository. After that, `-o` (offline) runs the tests and the demo without the network.
-
-**See the registry run (optional).** From `starter`:
+**See the registry run (optional).** In a terminal, from the project folder:
 
 ```
-mvn -q -o compile exec:java
+mvn -q compile
+java -cp target/classes exercise.RoutingRegistry
 ```
 
-It prints six lines. When all tasks are done they match `expected/test-summary.txt`. On the starter, some lines already look right (Held and Dropped); trust the tests, not the demo.
+It prints six lines. When all tasks are done they are:
 
-**What the tests check.** They run your code with several inputs and edge cases, and check that `heldOrders` reads its input list only once. They do not check your Big-O labels or whether you used `merge`; check those yourself.
+```
+Registered 5 orders; web-1002 is kettle at B2
+Dispatched from B2: web-1001
+Undo: web-1001; B2 next: [web-1001, web-1002]
+Held (mug): [web-1001, web-1003]
+Units by station: {A1=2, B2=3, C3=4}
+Dropped discontinued (rug): 1; 4 orders left
+```
 
-**Start over.** Undo your edits in `OrderKey.java` and `RoutingRegistry.java`. Compiled files go to `starter/target`, which you can delete at any time.
+On the starter, some lines already look right (Held and Dropped); trust the tests, not the demo.
+
+**What the tests check.** Run Tests runs the visible tests. Submit also runs held-out tests you can't see: they try more inputs and edge cases, such as a key that was never registered or a station that never had a queue, so make each method correct for every case its comment describes. The tests also check that `heldOrders` reads its input list only once. They do not check your Big-O labels or whether you used `merge`; check those yourself.
+
+**Start over.** Undo your edits in `OrderKey.java` and `RoutingRegistry.java`. Compiled files go to `target`, which you can delete at any time.
 
 ## Troubleshooting
 
 | Problem | What to do |
 |---|---|
-| `there is no POM in this directory` | The terminal is not in `starter`. Run `cd starter`, then the command again. |
-| `mvn: command not found` or `'mvn' is not recognized` | Maven is not available in this terminal. Ask your instructor, or see **Requirements**. |
-| `mvn -v` shows a Java version other than 25, or `release version 25 not supported` | The build needs JDK 25. Ask your instructor, or point `JAVA_HOME` at a JDK 25 and open a new terminal. |
-| `Cannot access central in offline mode`, or a missing artifact | The dependency step has not finished. Run `mvn -q dependency:go-offline` once with internet access. |
 | `COMPILATION ERROR` | Maven names the file and `[line,column]`. Fix that line and run the tests again. |

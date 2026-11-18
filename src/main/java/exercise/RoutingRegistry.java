@@ -1,4 +1,4 @@
-package routing;
+package exercise;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class RoutingRegistry {
         return keys;
     }
 
-    /** Given. A short demo run of the registry; run it with mvn -q -o compile exec:java. */
+    /** Given. A short demo run of the registry; run it with java -cp target/classes exercise.RoutingRegistry after mvn -q compile. */
     public static void main(String[] args) {
         RoutingRegistry registry = new RoutingRegistry();
         List<Order> arrivals = List.of(
